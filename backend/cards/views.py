@@ -48,8 +48,8 @@ class FlashcardCreateView(APIView):
         if isinstance(data, dict):
             serializer = serializers.FlashcardSerializer(data=data)
             if serializer.is_valid():
-                return Response({"success": serializer.data})
-            return Response({"error": serializer.errors})
+                return Response({"success": serializer.data}, status=status.HTTP_201_CREATED)
+            return Response({"error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
         return Response(
             {"error":"Data format is not recognized"},
