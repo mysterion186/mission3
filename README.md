@@ -4,6 +4,17 @@ The aim is to create a Flashcard application. I'll use the template I created [D
 I'll this project as an example of how you can reuse this template as your own.
 You'll be able to find a thread on my work [here](https://x.com/kowsik186/status/1728719396829384817?s=20). 
 
+## Working process
+### Features
+-  Create a Deck (contains Flashcard)  
+-  Go through all the Flashcard within a Deck  
+-  Basically CRUD operation on Deck and Flashcard
+
+### Models
+First, the current user model has 2 fields `email` and `biography`. As the user won't need the second one I need to update it.
+For doing this, I first need to update the model by deleting everything related to the `biography` field.
+I also need to update the `serializers`, `views` and don't forget about the tests. 
+
 ## Installation
 ### Basic installation
 For installing this project you can run the following command:
