@@ -2,6 +2,7 @@
 from rest_framework.generics import (
     CreateAPIView,
     ListAPIView,
+    RetrieveAPIView
 )
 from rest_framework import status
 from rest_framework.views import APIView
@@ -67,6 +68,29 @@ class DeckListView(ListAPIView):
     serializer_class = serializers.DeckSerializer
     queryset = models.Deck.objects.all()
     permission_classes = [AllowAny]
+
+class DeckDisplayView(RetrieveAPIView):
+    """View for getting all Flashcard for a specific Deck (based on id)."""
+    serializer_class = serializers.DeckDisplaySerializer
+    permission_classes = [AllowAny]
+
+    def get_object(self):
+        pk = self.kwargs.get('pk')
+        try:
+            return models.Deck.objects.get(pk=pk)
+        except models.Deck.DoesNotExist:
+            return None
+
+    def retrieve(self, request, *args, **kwargs):
+        """Override the method to display an error if the Deck does not exist."""
+        instance = self.get_object()
+        if not instance:
+            return Response(
+                {"error": "Deck does not exist"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
 
 class DeckCreateView(CreateAPIView):
     """Create a Deck."""
