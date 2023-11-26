@@ -6,7 +6,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 class MyUserManager(BaseUserManager):
     """Handle user's creation."""
-    def create_user(self, email, biography=None, password=None):
+    def create_user(self, email, password=None):
         """
         Creates and saves a User with the given email. 
         Leave empty all information that are not found with external providers
@@ -17,21 +17,19 @@ class MyUserManager(BaseUserManager):
 
         user = self.model(
             email=self.normalize_email(email),
-            biography=biography,
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, biography=None, password=None):
+    def create_superuser(self, email, password=None):
         """
         Same function, just create a super user here.
         """
         user = self.create_user(
             email,
             password=password,
-            biography=biography,
         )
         user.is_admin = True
         user.save(using=self._db)
@@ -49,7 +47,6 @@ class MyUser(AbstractBaseUser):
         max_length=255,
         unique=True,
     )
-    biography = models.CharField(max_length=255, null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
 
@@ -75,15 +72,3 @@ class MyUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
-
-    @property
-    def is_complete(self):
-        """Returns a boolean according to the fact that a user is complete.
-        
-        Should write a condition to check that all the required field for using the app are set.
-        """
-        # check that biography is not None
-        complete = True # assume that the user is always complete
-        if self.biography is None:
-            complete = False
-        return complete
