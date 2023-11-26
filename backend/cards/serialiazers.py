@@ -9,7 +9,7 @@ class ThemeSerializer(serializers.ModelSerializer):
     class Meta:
         """Default meta class."""
         model = Theme
-        fields = ["theme"]
+        fields = ["id", "theme"]
 
 class DeckSerializer(serializers.ModelSerializer):
     """Serializer for the Deck model."""
@@ -17,7 +17,7 @@ class DeckSerializer(serializers.ModelSerializer):
     class Meta:
         """Default meta class."""
         model = Deck
-        fields = ["owner", "user_email", "theme", "name"]
+        fields = ["id", "owner", "user_email", "theme", "name"]
 
     def get_user_email(self, obj):
         """Return the user's email."""
