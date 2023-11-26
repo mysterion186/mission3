@@ -9,7 +9,7 @@ class Theme(models.Model):
     theme = models.CharField(max_length=250)
 
     def __str__(self) -> str:
-        return self.theme
+        return str(self.theme)
 
 class Deck(models.Model):
     """This model represents a Deck. It will contains a set of Flashcards."""
@@ -21,7 +21,9 @@ class Deck(models.Model):
         return str(self.owner) + " | " + self.name
 
 class Flashcard(models.Model):
-    """This model represents a Flashcard. It will contains."""
+    """This model represents a Flashcard. 
+    It will contains a question and its answer with a position (in the Deck).
+    """
     deck = models.ForeignKey(Deck, on_delete=models.CASCADE)
     question = models.CharField(max_length=250)
     answer = models.CharField(max_length=500)
