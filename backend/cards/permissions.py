@@ -27,7 +27,7 @@ class IsDeckOwner(permissions.BasePermission):
                             deck = Deck.objects.get(pk=deck_id)
                             has_perm = deck.owner == request.user
                         except Deck.DoesNotExist:
-                            return False
+                            has_perm = False
                 return has_perm
             if isinstance(request.data, dict):
                 # check the deck id
@@ -39,4 +39,4 @@ class IsDeckOwner(permissions.BasePermission):
                     return deck.owner == request.user
                 except Deck.DoesNotExist:
                     return False
-        return obj.owner == request.user
+        return False
