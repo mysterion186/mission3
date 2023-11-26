@@ -13,7 +13,7 @@ class Theme(models.Model):
 
 class Deck(models.Model):
     """This model represents a Deck. It will contains a set of Flashcards."""
-    owner = models.OneToOneField(MyUser, on_delete=models.CASCADE)
+    owner = models.ForeignKey(MyUser, on_delete=models.CASCADE)
     theme = models.ForeignKey(Theme, on_delete=models.CASCADE)
     name = models.CharField(max_length=250) # name of the deck
 
