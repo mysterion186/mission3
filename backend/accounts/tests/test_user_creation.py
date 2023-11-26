@@ -19,39 +19,20 @@ class CreateAccount(TestCase):
             "email": "ed@elric.com",
             "password": "azerty123azerty123",
             "password1": "azerty123azerty123",
-            "biography": "My name is Ed"
         }
 
         self.created_user = {
             "email": "al@elric.com",
             "password": "azerty123azerty123",
             "password1": "azerty123azerty123",
-            "biography": "My name is Al"
         }
         models.MyUser.objects.create_user(
             email=self.created_user["email"],
             password=self.created_user["password"],
-            biography=self.created_user["biography"]
         )
 
     def test_working_account_creation(self):
         """Create a new account -> suppose to work."""
-        response = self.client.post(
-            reverse("users:create_basic_user"),
-            data=json.dumps(self.user_to_create),
-            content_type=self.content_type
-        )
-
-        # check user is in the db
-        user = models.MyUser.objects.get(email=self.user_to_create["email"])
-        serializer = serializers.UserSerializer(user)
-
-        self.assertEqual(response.data, serializer.data)
-        self.assertEqual(response.status_code, 201)
-
-    def test_working_account_creation_without_biography(self):
-        """Try to create an account without giving the biography value."""
-        self.user_to_create.pop("biography") # remove the value for biography
         response = self.client.post(
             reverse("users:create_basic_user"),
             data=json.dumps(self.user_to_create),

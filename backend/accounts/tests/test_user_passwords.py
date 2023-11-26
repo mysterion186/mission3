@@ -20,11 +20,9 @@ class TestPasswords(TestCase):
             "email": "ed@elric.com",
             "password": "azerty123azerty123",
             "password1": "azerty123azerty123",
-            "biography": "My name is Ed"
         }
         self.user_ed = models.MyUser.objects.create_user(
             email=self.information["email"],
-            biography=self.information["biography"],
             password=self.information["password"]
         )
         # self.user_ed.set_password(self.information["password"])
