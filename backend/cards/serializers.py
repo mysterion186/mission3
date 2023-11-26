@@ -40,3 +40,18 @@ class FlashcardSerializer(serializers.ModelSerializer):
                 return deck.name
         deck = obj.deck
         return deck.name
+
+class DeckDisplaySerializer(serializers.ModelSerializer):
+    """Serializer that will display all the Flashcard for a selected Deck."""
+    flashcards = serializers.SerializerMethodField()
+
+    class Meta:
+        """Default class meta."""
+        model = Deck
+        fields = ['owner', 'theme', 'name', 'flashcards']
+
+    def get_flashcards(self, obj):
+        """Retrieve all flashcard for the specific deck."""
+        flashcards = Flashcard.objects.filter(deck=obj)
+        serializer = FlashcardSerializer(flashcards, many=True)
+        return serializer.data
