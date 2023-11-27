@@ -5,12 +5,11 @@ function App() {
   return (
       <div>
         <h2>React Google Login</h2>
-        <p><Link to={"/login"}>login</Link></p>
-        <p><Link to={"/register"}>register</Link></p>
-        <p><Link to={"/user"}>user</Link></p>
-        <p><Link to={"/update-password"}>update-password</Link></p>
-        <p><Link to={"/password-reset-link"}>password-reset-link</Link></p>
-        <p><Link to={"/optional-field"}>Set optional parameter</Link></p>
+        <p><Link to={"/auth/login"}>login</Link></p>
+        <p><Link to={"/auth/register"}>register</Link></p>
+        <p><Link to={"/auth/user"}>user</Link></p>
+        <p><Link to={"/auth/update-password"}>update-password</Link></p>
+        <p><Link to={"/auth/password-reset-link"}>password-reset-link</Link></p>
         <p>Click on the given link for actually change your password</p>
       </div>
   );
