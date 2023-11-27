@@ -31,8 +31,8 @@ export default {
     },
 
     // returns all flashcard for a specific Deck
-    async getQuiz(id: number){
-        return this.call("get", `/cards/deck/${String(id)}`)
+    async getQuiz(id: string){
+        return this.call("get", `/cards/deck/${id}`)
     },
 
 }
