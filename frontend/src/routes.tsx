@@ -7,6 +7,7 @@ import UpdatePassword from "./components/authentication/UpdatePassword.tsx";
 import PasswordResetLink from "./components/authentication/PasswordResetLink.tsx";
 import PasswordReset from "./components/authentication/PasswordReset.tsx";
 import UserOptionalField from "./components/authentication/UserOptionalField.tsx";
+import AuthPage from "./pages/AuthPage.tsx";
 
 const router = createBrowserRouter([
     {
@@ -14,33 +15,35 @@ const router = createBrowserRouter([
         element: <App />
     },
     {
-        path: "login",
-        element: <Login />
+        path: "/auth",
+        element: <AuthPage />,
+        children: [
+            {
+                path: "login",
+                element: <Login />
+            },
+            {
+                path: "register",
+                element: <Registration />
+            },
+            {
+                path: "user",
+                element: <User />
+            },
+            {
+                path: "update-password",
+                element: <UpdatePassword />
+            },
+            {
+                path: "password-reset-link",
+                element: <PasswordResetLink />
+            },
+            {
+                path: "password/reset/:uidb64/:token",
+                element: <PasswordReset />
+            }
+        ]
     },
-    {
-        path: "register",
-        element: <Registration />
-    },
-    {
-        path: "user",
-        element: <User />
-    },
-    {
-        path: "update-password",
-        element: <UpdatePassword />
-    },
-    {
-        path: "password-reset-link",
-        element: <PasswordResetLink />
-    },
-    {
-        path: "password/reset/:uidb64/:token",
-        element: <PasswordReset />
-    },
-    {
-        path: "optional-field",
-        element: <UserOptionalField />
-    }
 ])
 
 export default router;
