@@ -6,7 +6,6 @@ import AuthApi from "../../services/AuthApi";
 import AuthStorage from "../../services/AuthStorage";
 import { UserInformation } from "../../types/api.types";
 import { useRequireAuth } from "../../hooks/authentication";
-import { useNavigate } from "react-router-dom";
 
 function User() {
     const [user, setUser] = useState<UserInformation>(
@@ -15,7 +14,6 @@ function User() {
             biography: ""
         }
     );
-    const navigate = useNavigate();
 
     useRequireAuth();
     useEffect(() => {
@@ -25,9 +23,6 @@ function User() {
 
             if (response.status === 200){
                 setUser(response.data);
-            }
-            else if (response.status === 403){
-                navigate("/optional-field");
             }
         }
         fetchData();

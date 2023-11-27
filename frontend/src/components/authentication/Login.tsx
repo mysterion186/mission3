@@ -25,7 +25,7 @@ function Login() {
             const res = await AuthApi.getJWTToken(formattedCredentials);
             if (res.status === 200){
                 AuthStorage.saveJWTToken(res.data.access);
-                navigate("/user");
+                navigate("auth//user");
             }
             else{
                 console.log("An error occured ", res);
@@ -43,7 +43,7 @@ function Login() {
         if (res.status === 200){
             console.log(res.data.access)
             AuthStorage.saveJWTToken(res.data.access);
-            navigate("/user");
+            navigate("auth//user");
         }
         else{
             console.log("An error occured ", res);
@@ -107,7 +107,7 @@ function Login() {
                     const res = await AuthApi.getJWTToken(formattedCredentials);
                     if (res.status === 200){
                         AuthStorage.saveJWTToken(res.data.access);
-                        navigate("/user");
+                        navigate("auth/user");
                     }
                     else{
                         console.log("An error occured ", res);
