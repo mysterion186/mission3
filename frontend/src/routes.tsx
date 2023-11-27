@@ -6,7 +6,6 @@ import User from "./components/authentication/User.tsx";
 import UpdatePassword from "./components/authentication/UpdatePassword.tsx";
 import PasswordResetLink from "./components/authentication/PasswordResetLink.tsx";
 import PasswordReset from "./components/authentication/PasswordReset.tsx";
-import UserOptionalField from "./components/authentication/UserOptionalField.tsx";
 import AuthPage from "./pages/AuthPage.tsx";
 
 const router = createBrowserRouter([
