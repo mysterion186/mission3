@@ -7,6 +7,8 @@ import UpdatePassword from "./components/authentication/UpdatePassword.tsx";
 import PasswordResetLink from "./components/authentication/PasswordResetLink.tsx";
 import PasswordReset from "./components/authentication/PasswordReset.tsx";
 import AuthPage from "./pages/AuthPage.tsx";
+import CardsPage from "./pages/CardsPage.tsx";
+import Decks from "./components/cards/Decks.tsx";
 
 const router = createBrowserRouter([
     {
@@ -43,6 +45,16 @@ const router = createBrowserRouter([
             }
         ]
     },
+    {
+        path: "/cards",
+        element: <CardsPage />,
+        children: [
+            {
+                path: "",
+                element: <Decks />
+            }
+        ]
+    }
 ])
 
 export default router;
