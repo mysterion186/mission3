@@ -4,6 +4,7 @@
 import { useState, useEffect } from "react";
 import CardsApi from "../../services/CardsApi";
 import { Deck } from "../../types/card.type";
+import { Link } from "react-router-dom";
 
 function Decks(){
     const [decks, setDecks] = useState<Deck[]>([]);
@@ -27,7 +28,9 @@ function Decks(){
             {
                 decks.map((element, index) => (
                     <li key={index}>
-                        name: {element.name} | theme: {element.theme}
+                        <Link to={String(index + 1)}>
+                            name: {element.name} | theme: {element.theme}
+                        </Link>
                     </li>
                 ))
             }
