@@ -9,6 +9,7 @@ import PasswordReset from "./components/authentication/PasswordReset.tsx";
 import AuthPage from "./pages/AuthPage.tsx";
 import CardsPage from "./pages/CardsPage.tsx";
 import Decks from "./components/cards/Decks.tsx";
+import Quiz from "./components/cards/Quiz.tsx";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
             {
                 path: "",
                 element: <Decks />
+            },
+            {
+                path: ":id",
+                element: <Quiz />
             }
         ]
     }
