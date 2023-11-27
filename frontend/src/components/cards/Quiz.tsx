@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 import CardsApi from "../../services/CardsApi";
-import { Quiz } from "../../types/card.type";
+import { Quiz as TQuiz } from "../../types/card.type";
 import { useParams } from "react-router-dom";
 
 function Quiz(){
     const { id } = useParams();
-    const [quiz, setQuiz] = useState<Quiz>();
+    const [quiz, setQuiz] = useState<TQuiz>();
 
     useEffect(()=>{
         async function fetchData(){
