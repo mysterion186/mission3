@@ -19,7 +19,7 @@ function Decks(){
             }
         }
         fetchData();
-    }, [])
+    }, []);
     return(
         <>
         <h1>Resulat</h1>
