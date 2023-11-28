@@ -26,7 +26,7 @@ function Login() {
             if (res.status === 200){
                 AuthStorage.saveJWTToken(res.data.access);
                 AuthStorage.saveUserId(res.data.id);
-                navigate("auth/user");
+                navigate("/auth/user");
             }
             else{
                 console.log("An error occured ", res);
@@ -45,7 +45,7 @@ function Login() {
             console.log(res.data.access)
             AuthStorage.saveJWTToken(res.data.access);
             AuthStorage.saveUserId(res.data.id);
-            navigate("auth/user");
+            navigate("/auth/user");
         }
         else{
             console.log("An error occured ", res);
