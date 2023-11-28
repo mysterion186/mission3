@@ -31,6 +31,7 @@ class FlashcardCreateView(APIView):
             for elt in data:
                 serializer = serializers.FlashcardSerializer(data=elt)
                 if serializer.is_valid() :
+                    serializer.save()
                     response_list.append(serializer.data)
                 else:
                     return Response(
