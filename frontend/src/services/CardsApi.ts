@@ -38,5 +38,13 @@ export default {
     // create a Deck
     async createDeck(data: {owner: number, theme: number, name: string}, token: string){
         return this.call("post", "/cards/deck/create", data, token);
+    },
+
+    async createFlashcard(
+        data: {deck: number, question: string, answer: string, position: number} | 
+            {deck: number, question: string, answer: string, position: number} [],
+        token: string
+    ){
+       return this.call("post", "/cards/flashcard/create", data, token);
     }
 }
