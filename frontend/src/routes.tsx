@@ -10,6 +10,8 @@ import AuthPage from "./pages/AuthPage.tsx";
 import CardsPage from "./pages/CardsPage.tsx";
 import Decks from "./components/cards/Decks.tsx";
 import Quiz from "./components/cards/Quiz.tsx";
+import CreateDeck from "./components/cards/CreateDeck.tsx";
+import CreateFlashcard from "./components/cards/CreateFlashcard.tsx";
 
 const router = createBrowserRouter([
     {
@@ -57,6 +59,14 @@ const router = createBrowserRouter([
             {
                 path: ":id",
                 element: <Quiz />
+            },
+            {
+                path: "deck",
+                element: <CreateDeck />
+            },
+            {
+                path: "flashcard/:id",
+                element: <CreateFlashcard />
             }
         ]
     }
