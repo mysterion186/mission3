@@ -1,80 +1,77 @@
 /**
  * View for creating flashcards
  */
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { useRequireAuth } from "../../hooks/authentication";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CardsApi from "../../services/CardsApi";
 import AuthStorage from "../../services/AuthStorage";
 
 
 function CreateFlashcard() {
-
-    const [formData, setFormData] = useState({
-        deck: -1, 
-        question: "",
-        answer: "",
-        position: 0
-    });
-    const [token, setToken] = useState("");
-
-    // make sure the user is logged in 
     useRequireAuth();
-    useEffect(() => {
-        const localToken: string = AuthStorage.getJWTToken() as string;
-        setToken(localToken);
-        const userId: string = AuthStorage.getUserId() as string;
-        setFormData((prevData) => ({
-            ...prevData,
-            ["owner"]: Number(userId),
-        }))
-    }, []);
-    const navigate = useNavigate();
 
-    const handleSubmit = async (e:FormEvent) => {
+    const { id } = useParams();
+    const [position, setPosition] = useState(1);
+    const [forms, setForms] = useState([
+        { deck: Number(id) as number, question: '', answer: '', position: position },
+      ]);
+    const [token, setToken] = useState("");
+    
+      const handleAddForm = () => {
+        setForms([...forms, { deck: Number(id), question: '', answer: '', position: position + 1 }]);
+      };
+    
+      const handleChange = (index: number, field: string, value: string) => {
+        const updatedForms = [...forms];
+        updatedForms[index][field] = value;
+        setForms(updatedForms);
+      };
+      const navigate = useNavigate();
+
+      const handleSubmit = async (e:FormEvent) => {
         e.preventDefault();
-        
-    };
+        const res = await CardsApi.createFlashcard(forms, token);
+        if (res.status === 201){
+            console.log(res.data);
+            navigate("/cards");
+        }
+        else{
+            console.log(res);
+        }
+      };
+    
+      useEffect(() => {
+        const localToken:string = AuthStorage.getJWTToken() as string;
+        setToken(localToken);
 
-    const handleInputchange = (e: ChangeEvent<HTMLInputElement>) => {
-        const {name, value} = e.target;
-        setFormData((prevData) => ({
-            ...prevData,
-            [name]: value,
-        }));
+      }, [])
+      return (
+        <div>
+          {forms.map((form, index) => (
+            <div key={index}>
+              <label>
+                Question:
+                <input
+                  type="text"
+                  value={form.question}
+                  onChange={(e) => handleChange(index, 'question', e.target.value)}
+                />
+              </label>
+              <label>
+                Answer:
+                <input
+                  type="text"
+                  value={form.answer}
+                  onChange={(e) => handleChange(index, 'answer', e.target.value)}
+                />
+              </label>
+            </div>
+          ))}
+          <button onClick={handleAddForm}>Add More Fields</button>
+          <button onClick={handleSubmit}>Submit</button>
+        </div>
+      );
     };
-
-    return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="question">question:</label>
-                    <input
-                    type="text"
-                    id="question"
-                    name="question"
-                    value={formData.question}
-                    onChange={handleInputchange}
-                    required
-                    placeholder="Question"
-                    />
-                </div>
-                <div>
-                    <label htmlFor="answer">answer:</label>
-                    <input
-                    type="text"
-                    id="answer"
-                    name="answer"
-                    value={formData.answer}
-                    onChange={handleInputchange}
-                    required
-                    placeholder="Answer"
-                    />
-                </div>
-                <button type="submit">Create Flashcard</button>
-            </form>
-        </>
-    )
-}
 
 export default CreateFlashcard;
