@@ -64,6 +64,9 @@ class CustomTokenObtainPairView(TokenObtainPairView):
             user = models.MyUser.objects.get(email=request.data["email"])
             user.last_login = timezone.now()
             user.save()
+            serializer = serializers.UserSerializer(user)
+            for key, value in serializer.data.items():
+                response.data[key] = value
         return response
 
 @api_view(['GET', 'POST'])

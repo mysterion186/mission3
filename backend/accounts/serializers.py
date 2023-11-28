@@ -12,7 +12,7 @@ class CreateBasicUserSerializer(serializers.ModelSerializer):
     class Meta:
         """Default meta class."""
         model = models.MyUser
-        fields = ["email", "password","password1"]
+        fields = ["id", "email", "password","password1"]
 
     def validate(self, attrs):
         """Validate data regarding the user's informations."""
@@ -47,7 +47,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         """Default meta class."""
         model = models.MyUser
-        fields = ["email",]
+        fields = ["id", "email"]
 
 class UpdateBasicUserPasswordSerializer(serializers.ModelSerializer):
     """Serializer for updating basic user's password."""
