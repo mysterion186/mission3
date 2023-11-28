@@ -35,4 +35,8 @@ export default {
         return this.call("get", `/cards/deck/${id}`)
     },
 
+    // create a Deck
+    async createDeck(data: {owner: number, theme: number, name: string}, token: string){
+        return this.call("post", "/cards/deck/create", data, token);
+    }
 }
