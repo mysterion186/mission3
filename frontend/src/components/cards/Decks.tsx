@@ -23,7 +23,7 @@ function Decks(){
     }, []);
     return(
         <>
-        <h1>Resulat</h1>
+        <h1>List Decks :</h1>
         <ul>
             {
                 decks.map((element, index) => (
@@ -35,6 +35,7 @@ function Decks(){
                 ))
             }
         </ul>
+        <Link to={"decks"}>Create Deck</Link>
         </>
     )
 }
