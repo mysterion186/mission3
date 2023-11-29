@@ -43,7 +43,7 @@ export function useRequireAuth(){
             isAuthenticated = isValideToken(token);
         }
         if(!isAuthenticated){
-            navigate("auth/login");
+            navigate("/auth/login");
         }
     }, [navigate]);
 }
